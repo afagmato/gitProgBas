@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Poppins:wght@100&display=swap');
+
+body {
+    font-family: 'Cabin Sketch', cursive; 
+    background-color: #2C3333; 
+}
+
+#seleccionar-animal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.titulo {
+    color: #CBE4DE;
+    font-size: 48px;
+}
+.subtitulo {
+    color: #CBE4DE;
+    font-size: 20px;
+}
+.targetes, .targetes-atacs{
+    display: flex;
+    gap: 10px;
+}
+.targeta-animal {
+    width: 144px;
+    height: 100px;
+    background: #0E8388;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    color: #2C3333;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+
+}
+.targeta-animal img {
+    width: 80px
+}
+
+#boto-animal {
+    margin-top: 30px;
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #CBE4DE;
+    color: #CBE4DE;
+    font-family: 'Cabin Sketch', cursive;
+}
+
+input {
+    display: none;
+}
+input:checked + label {
+    background-color: brown;
+    width: 138px;
+}
+#seleccionar-atac {
+    flex-direction: column;
+    align-items: center;
+}
+.boto-atac {
+    background: #0E8388;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 80px;
+    color: #CBE4DE;
+    font-family: 'Cabin Sketch', cursive;
+}
+#missatges {
+    width: 280px;
+    background: #CBE4DE;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Cabin Sketch', cursive;
+}
+#boto-reiniciar {
+    border: none;
+    color: #2C3333;
+}
+.atacs {
+    display: grid;
+    grid-template: 100px 1fr / 100px 1fr; 
+    color: #CBE4DE;
+}
+.atacs-jugador, .atacs-enemic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (max-width:360px) {
+    .targetes, .targetes-atacs {
+        flex-direction: column;
+    }
+}

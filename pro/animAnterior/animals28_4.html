@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+	    <title>ANIMALS FEROTGES</title>
+        <link rel="stylesheet" href="./animalsstyles.css">
+    </head>
+    <body>
+        <section id="seleccionar-animal">
+            <h1 class="titulo">Animals ferotges</h1>
+
+            <h2 class="subtitulo">Escull un animal:</h2>
+
+            <div id="contTargetes" class="targetes">
+            </div>
+
+            <button id="boto-animal">Seleccionar</button>
+        </section>
+
+        <section id="seleccionar-atac">
+            <h1 class="titulo">Animals ferotges</h1>
+            
+            <h2 class="subtitulo">Escull el teu atac:</h2>
+
+            <div class="targetes-atacs">
+                <button id="boto-terra" class="boto-atac">Terra 🪹</button>
+                <button id="boto-aigua" class="boto-atac">Aigua 💦</button>
+                <button id="boto-foc" class="boto-atac">Foc ☄️</button>
+            </div>
+
+            <div id="missatges">
+                <p id="resultat">¡¡¡Fot-li fort!!!</p>
+            
+                <section id="reiniciar">
+                    <button id="boto-reiniciar">Vols tornar a jugar?</button>
+                </section>
+            </div>
+            <div class="atacs">
+                <div class="atacs-jugador">
+                    <p id="vides-jugador">3</p>
+                    <p id="animal-jugador"></p>
+                    <div id="atacs-d-jugador"></div>
+                </div>
+                <div class="atacs-enemic"> 
+                    <p id="vides-enemic">3</p>
+                    <p id="animal-enemic"></p>
+                    <div id="atacs-d-enemic"></div>               
+                </div>
+            </div>
+        </section>
+        <script src="./js/animals28_4.js"></script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+	    <title>Pedra, paper o estisora</title>
+	    <script> 
+        // 1 és pedra, 2 és paper i 3 és estisores
+        let jugador = 0
+        let pc = Math.random()
+        jugador = prompt("Escull: 1 per pedra, 2 per parer i 3 per estisores")
+        //alert("Has escollit " + jugador)
+        if(jugador == 1) { 
+            alert("Has escollit 👊")
+        } 
+        else if(jugador == 2) { 
+            alert("Has escollit ✋")
+        } 
+        else if(jugador == 3) { 
+            alert("Has escollit ✌️")
+        } 
+        else { 
+            alert("No has escollit cap opció possible")
+        } 
+        if(pc == 1) { 
+            alert("Pc ha escollit 👊🏼")
+        } 
+        else if(pc == 2) { 
+            alert("Pc ha escollit ✋")
+        } 
+        else if(pc == 3) { 
+            alert("Pc ha escollit ✌️")
+        }
+        // COMBAT
+        if(pc == jugador) {
+            alert("Empat")
+        } 
+        else if(jugador == 1 && pc == 3) {
+            alert("Has guanyat")
+        } 
+        else if(jugador == 2 && pc == 1) {
+            alert("Has guanyat")
+        } 
+        else if(jugador == 3 && pc == 2) {
+            alert("Has guanyat")
+        } 
+        else { 
+            alert("Has perdut")
+        }
+        </script>
+    </head>
+    <body>
+        <h1>Pedra, paper o estisores</h1>
+    </body>
+</html>
