@@ -44,6 +44,10 @@ let victoriesJugador = 0
 let victoriesEnemic = 0
 let videsJugador = 3
 let videsEnemic = 3
+let lienzo = mapa.getContext("2d")
+let intervalo
+let mapaBackgroud = new Image()
+mapaBackgroud.src = './assets/mapaestelar.jpeg'
 
 class Bestia {
     constructor(nom, foto, vida, tipus) {
@@ -52,6 +56,14 @@ class Bestia {
         this.vida = vida
         this.tipus = tipus
         this.atacs = []
+        this.x = 40
+        this.y = 60
+        this.ancho = 120
+        this.alto = 120
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadx = 0
+        this.velocidady = 0
     }
 }
 
@@ -158,6 +170,7 @@ function seleccionarAnimalJugador() { // Selecció animal jugador
 
     //sectionSeleccionarAtac.style.display = 'flex'
     sectionVeureMapa.style.display = 'flex'
+    iniciarMapa()
     
     if (inputGat.checked) {
         spanAnimalJugador.innerHTML = inputGat.id
@@ -356,6 +369,78 @@ function reiniciarJoc(){
 
 function aleatori(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function pintarCanvas() {
+    alpaca.x = alpaca.x + alpaca.velocidadx
+    alpaca.y = alpaca.y + alpaca.velocidady
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        mapaBackgroud,
+        0,
+        0,
+        800,
+        600
+        )
+    lienzo.drawImage(
+        alpaca.mapaFoto,
+        alpaca.x,
+        alpaca.y,
+        alpaca.ancho,
+        alpaca.alto
+    )
+    
+}
+
+function moureDreta() {
+    alpaca.velocidadx = 5
+}
+
+function moureEsquerra() {
+    alpaca.velocidadx = -5
+}
+
+function moureAvall() {
+    alpaca.velocidady = 5
+}
+
+function moureAmunt() {
+    alpaca.velocidady = -5
+}
+
+function detenerMovimiento() {
+    alpaca.velocidadx = 0
+    alpaca.velocidady = 0
+}
+
+function sePresionoUnaTecla(event) {
+    switch (event.key) {
+        case 'ArrowUp':
+            moureAmunt()
+            break
+        case 'ArrowDown':
+            moureAvall()
+            break
+        case 'ArrowLeft':
+            moureEsquerra()
+            break
+        case 'ArrowRight':
+            moureDreta()
+            break
+        default:
+            break
+    }
+}
+
+function iniciarMapa() {
+    mapa.width = 600
+    mapa.height = 450
+
+    intervalo = setInterval(pintarCanvas, 50)
+
+    window.addEventListener('keydown', sePresionoUnaTecla)
+
+    window.addEventListener('keyup', detenerMovimiento)
 }
 
 window.addEventListener('load', iniciarJoc)
