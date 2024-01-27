@@ -32,6 +32,7 @@ let inputHamster
 let inputPollet
 let inputPorc
 let animalJugador
+let animalJugadorObjecte
 let atacsAnimal
 let atacsAnimalEnemic
 let botoTerra
@@ -47,23 +48,46 @@ let videsEnemic = 3
 let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackgroud = new Image()
-mapaBackgroud.src = './assets/mapaestelar.jpeg'
+mapaBackgroud.src = './assets/farm.png'
+let altQueBusquem
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 800
+
+if (anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+altQueBusquem = anchoDelMapa * 600 / 800
+
+mapa.width = anchoDelMapa
+mapa.height = altQueBusquem
+
 
 class Bestia {
-    constructor(nom, foto, vida, tipus) {
+    constructor(nom, foto, vida, tipus, x = 10, y = 10) {
         this.nom = nom
         this.foto = foto
         this.vida = vida
         this.tipus = tipus
         this.atacs = []
-        this.x = 40
-        this.y = 60
-        this.ancho = 120
-        this.alto = 120
+        this.ancho = mapa.width / 12
+        this.alto = mapa.width / 12
+        this.x = aleatori(0, mapa.width - this.ancho)
+        this.y = aleatori(0, mapa.height - this.alto)
+        
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
         this.velocidadx = 0
         this.velocidady = 0
+    }
+    pintarAnimal() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
     }
 }
 
@@ -78,6 +102,18 @@ let hamster = new Bestia ('Hàmster', './assets/hamster.png', 5, 'aigua-terra')
 let pollet = new Bestia ('Pollet', './assets/pollet.png', 5, 'terra-foc')
 
 let porc = new Bestia ('Porc', './assets/porc.png', 5, 'foc-aigua')
+
+let gatEnemic = new Bestia ('Gat', './assets/gat.png', 5, 'foc', 360, 60)
+
+let gosEnemic = new Bestia ('Gos', './assets/gos.png', 5, 'terra', 60, 450)
+
+let alpacaEnemic = new Bestia ('Alpaca', './assets/alpaca.png', 5, 'aigua', 300, 300)
+
+let hamsterEnemic = new Bestia ('Hàmster', './assets/hamster.png', 5, 'aigua-terra', 500, 375)
+
+let polletEnemic = new Bestia ('Pollet', './assets/pollet.png', 5, 'terra-foc', 380, 450)
+
+let porcEnemic = new Bestia ('Porc', './assets/porc.png', 5, 'foc-aigua', 600, 40)
 
 
 gat.atacs.push(
@@ -128,6 +164,54 @@ porc.atacs.push(
     {nom: '☄️', id: 'boto-foc'},
 )
 
+gatEnemic.atacs.push(
+    {nom: '☄️', id: 'boto-foc'},
+    {nom: '☄️', id: 'boto-foc'},
+    {nom: '☄️', id: 'boto-foc'},
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '🧱', id: 'boto-terra'},
+)
+
+gosEnemic.atacs.push(
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '☄️', id: 'boto-foc'},        
+)
+
+alpacaEnemic.atacs.push(
+    {nom: '💦', id: 'boto-aigua' },
+    {nom: '💦', id: 'boto-aigua' },
+    {nom: '💦', id: 'boto-aigua' },
+    {nom: '🧱', id: 'boto-terra' },
+    {nom: '☄️', id: 'boto-foc' },
+)
+
+hamsterEnemic.atacs.push(
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '☄️', id: 'boto-foc'},
+)
+
+polletEnemic.atacs.push(
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '☄️', id: 'boto-foc'},
+    {nom: '☄️', id: 'boto-foc'},
+)
+
+porcEnemic.atacs.push(
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '💦', id: 'boto-aigua'},
+    {nom: '🧱', id: 'boto-terra'},
+    {nom: '☄️', id: 'boto-foc'},
+    {nom: '☄️', id: 'boto-foc'},
+)
+
 animals.push(gat,gos,alpaca,hamster,pollet,porc)
 
 function iniciarJoc() {
@@ -167,11 +251,6 @@ function seleccionarAnimalJugador() { // Selecció animal jugador
     
     sectionSeleccionarAnimal.style.display = 'none'
     
-
-    //sectionSeleccionarAtac.style.display = 'flex'
-    sectionVeureMapa.style.display = 'flex'
-    iniciarMapa()
-    
     if (inputGat.checked) {
         spanAnimalJugador.innerHTML = inputGat.id
         animalJugador = inputGat.id
@@ -195,8 +274,8 @@ function seleccionarAnimalJugador() { // Selecció animal jugador
     }
 
     extraureAtacs(animalJugador)
-    seleccionarAnimalEnemic()
-    
+    sectionVeureMapa.style.display = 'flex'
+    iniciarMapa()
 }
 
 function extraureAtacs() {
@@ -253,17 +332,18 @@ function sequenciaAtac() {
 
 }
 
-function seleccionarAnimalEnemic() { // Selecció animal enemic
+function seleccionarAnimalEnemic(enemic) { // Selecció animal enemic
     let animalAleatori = aleatori(0, animals.length -1)    
     
-    spanAnimalEnemic.innerHTML = animals[animalAleatori].nom
-    atacsAnimalEnemic = animals[animalAleatori].atacs
+    spanAnimalEnemic.innerHTML = enemic.nom
+    atacsAnimalEnemic = enemic.atacs
     sequenciaAtac()
-    console.log(animals[animalAleatori].nom)
+    console.log(enemic.nom)
 }
 
 
 function atacAleatoriEnemic() { // Atac aleatori de l'animal enemic
+    console.log('Atacs enemic', atacsAnimalEnemic );
     let atacAleatori = aleatori(0, atacsAnimalEnemic.length -1)
 
     if (atacsAnimalEnemic[atacAleatori].nom === '🧱') {
@@ -372,45 +452,54 @@ function aleatori(min, max) {
 }
 
 function pintarCanvas() {
-    alpaca.x = alpaca.x + alpaca.velocidadx
-    alpaca.y = alpaca.y + alpaca.velocidady
+    animalJugadorObjecte.x = animalJugadorObjecte.x + animalJugadorObjecte.velocidadx
+    animalJugadorObjecte.y = animalJugadorObjecte.y + animalJugadorObjecte.velocidady
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         mapaBackgroud,
         0,
         0,
-        800,
-        600
+        mapa.width,
+        mapa.height
         )
-    lienzo.drawImage(
-        alpaca.mapaFoto,
-        alpaca.x,
-        alpaca.y,
-        alpaca.ancho,
-        alpaca.alto
-    )
-    
+    animalJugadorObjecte.pintarAnimal()
+    gatEnemic.pintarAnimal()
+    alpacaEnemic.pintarAnimal()
+    gosEnemic.pintarAnimal()
+    polletEnemic.pintarAnimal()
+    hamsterEnemic.pintarAnimal()
+    porcEnemic.pintarAnimal()
+    if (animalJugadorObjecte.velocidadx !== 0 || animalJugadorObjecte.velocidady !== 0) {
+        revisarXoc(gatEnemic)
+        revisarXoc(alpacaEnemic)
+        revisarXoc(gosEnemic)
+        revisarXoc(porcEnemic)
+        revisarXoc(polletEnemic)
+        revisarXoc(hamsterEnemic)
+    }
+
+
 }
 
 function moureDreta() {
-    alpaca.velocidadx = 5
+    animalJugadorObjecte.velocidadx = 5
 }
 
 function moureEsquerra() {
-    alpaca.velocidadx = -5
+    animalJugadorObjecte.velocidadx = -5
 }
 
 function moureAvall() {
-    alpaca.velocidady = 5
+    animalJugadorObjecte.velocidady = 5
 }
 
 function moureAmunt() {
-    alpaca.velocidady = -5
+    animalJugadorObjecte.velocidady = -5
 }
 
 function detenerMovimiento() {
-    alpaca.velocidadx = 0
-    alpaca.velocidady = 0
+    animalJugadorObjecte.velocidadx = 0
+    animalJugadorObjecte.velocidady = 0
 }
 
 function sePresionoUnaTecla(event) {
@@ -433,14 +522,59 @@ function sePresionoUnaTecla(event) {
 }
 
 function iniciarMapa() {
-    mapa.width = 600
-    mapa.height = 450
-
+    animalJugadorObjecte= obtindreObjecteAnimal(animalJugador)
+    console.log(animalJugadorObjecte, animalJugador);
     intervalo = setInterval(pintarCanvas, 50)
 
     window.addEventListener('keydown', sePresionoUnaTecla)
 
     window.addEventListener('keyup', detenerMovimiento)
+}
+
+function obtindreObjecteAnimal() {
+    for ( let i = 0 ; i < animals.length ; i++ ) {
+        if (animalJugador === animals[i].nom) {
+            return animals[i]
+        }
+        
+    }
+    mostrarAtacs(atacs)
+    console.log(animalJugador)
+    
+    
+}
+
+function revisarXoc(enemic) {
+    const daltEnemic = enemic.y
+    const baixEnemic = enemic.y + enemic.alto
+    const dretaEnemic = enemic.x + enemic.ancho
+    const esquerraEnemic = enemic.x
+
+    const daltAnimal = 
+    animalJugadorObjecte.y
+    const baixAnimal = 
+    animalJugadorObjecte.y + animalJugadorObjecte.alto
+    const dretaAnimal = 
+    animalJugadorObjecte.x + animalJugadorObjecte.ancho
+    const esquerraAnimal = 
+    animalJugadorObjecte.x
+    
+    if(
+        baixAnimal < daltEnemic ||
+        daltAnimal > baixEnemic ||
+        dretaAnimal < esquerraEnemic ||
+        esquerraAnimal > dretaEnemic
+    ) {
+        return
+    }
+
+    detenerMovimiento()
+    clearInterval(intervalo)
+    console.log('Sha detectat un xoc');
+    sectionSeleccionarAtac.style.display = 'flex'
+    sectionVeureMapa.style.display = 'none'
+    seleccionarAnimalEnemic(enemic)
+    //alert("Has topat amb " + enemic.nom)
 }
 
 window.addEventListener('load', iniciarJoc)
