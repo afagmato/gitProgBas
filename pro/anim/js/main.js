@@ -103,17 +103,17 @@ let pollet = new Bestia ('Pollet', './assets/pollet.png', 5, 'terra-foc')
 
 let porc = new Bestia ('Porc', './assets/porc.png', 5, 'foc-aigua')
 
-let gatEnemic = new Bestia ('Gat', './assets/gat.png', 5, 'foc', 360, 60)
+let gatEnemic = new Bestia ('Gat Malparit', './assets/gat.png', 5, 'foc')
 
-let gosEnemic = new Bestia ('Gos', './assets/gos.png', 5, 'terra', 60, 450)
+let gosEnemic = new Bestia ('Gos Rabiós', './assets/gos.png', 5, 'terra')
 
-let alpacaEnemic = new Bestia ('Alpaca', './assets/alpaca.png', 5, 'aigua', 300, 300)
+let alpacaEnemic = new Bestia ('Alpaca Escupidora', './assets/alpaca.png', 5, 'aigua')
 
-let hamsterEnemic = new Bestia ('Hàmster', './assets/hamster.png', 5, 'aigua-terra', 500, 375)
+let hamsterEnemic = new Bestia ('Hàmster Mossegador', './assets/hamster.png', 5, 'aigua-terra')
 
-let polletEnemic = new Bestia ('Pollet', './assets/pollet.png', 5, 'terra-foc', 380, 450)
+let polletEnemic = new Bestia ('Pollet Caguetes', './assets/pollet.png', 5, 'terra-foc')
 
-let porcEnemic = new Bestia ('Porc', './assets/porc.png', 5, 'foc-aigua', 600, 40)
+let porcEnemic = new Bestia ('Porc Roncador', './assets/porc.png', 5, 'foc-aigua')
 
 
 gat.atacs.push(

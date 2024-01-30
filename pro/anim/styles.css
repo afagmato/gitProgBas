@@ -46,7 +46,6 @@ body {
 }
 
 #boto-animal {
-    margin-top: 30px;
     width: 180px;
     height: 40px;
     border-radius: 20px;
@@ -54,6 +53,7 @@ body {
     border: 2px solid #CBE4DE;
     color: #CBE4DE;
     font-family: 'Cabin Sketch', cursive;
+    margin-top: 30px;
 }
 
 input {
@@ -109,11 +109,25 @@ input:checked + label {
     align-items: center;
     justify-content: center;
 }
-#mapa {
-    border: 2px solid #2C33; 
+#veure-mapa button {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #CBE4DE;
+    color: #CBE4DE;
+    font-family: 'Cabin Sketch', cursive;
+    margin: 2px 0;
 }
 @media (max-width:360px) {
     .targetes, .targetes-atacs {
+        flex-direction: column;
+    }
+}
+@media (max-width:360px) {
+    #veure-mapa div {
+        display: flex;
+        align-items: center;
         flex-direction: column;
     }
 }

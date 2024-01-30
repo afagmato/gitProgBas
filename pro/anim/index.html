@@ -4,6 +4,7 @@
         <meta charset="utf-8"/> 
 	    <title>ANIMALS</title>
         <link rel="stylesheet" href="./styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <section id="seleccionar-animal">
@@ -18,12 +19,14 @@
         </section>
 
         <section id="veure-mapa">
-            <h1 class="titulo">Inspecciona el mapa amb el teu animal ferotge</h1>
+            <h2 class="subtitulo">Inspecciona el mapa amb el teu animal ferotge</h2>
             <canvas id="mapa"></canvas>
             <button onmouseup="detenerMovimiento()" onmousedown="moureAmunt()">🔼</button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moureEsquerra()">◀️</button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moureAvall()">🔽</button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moureDreta()">▶️</button>
+            <div>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureEsquerra()">◀️</button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureAvall()">🔽</button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureDreta()">▶️</button>
+            </div>
         </section>
 
         <section id="seleccionar-atac">
