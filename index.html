@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+	    <title>ANIMALS</title>
+        <link rel="stylesheet" href="./styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section id="seleccionar-animal">
+            <h1 class="titulo">Animals ferotges</h1>
+
+            <h2 class="subtitulo">Escull un animal:</h2>
+
+            <div id='contTargetes' class="targetes">
+            </div>
+
+            <button id="boto-animal">Seleccionar</button>
+        </section>
+
+        <section id="veure-mapa">
+            <h2 class="subtitulo">Inspecciona el mapa amb el teu animal ferotge</h2>
+            <canvas id="mapa"></canvas>
+            <button onmouseup="detenerMovimiento()" onmousedown="moureAmunt()">🔼</button>
+            <div>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureEsquerra()">◀️</button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureAvall()">🔽</button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moureDreta()">▶️</button>
+            </div>
+        </section>
+
+        <section id="seleccionar-atac">
+            <h1 class="titulo">Animals ferotges</h1>
+            
+            <h2 class="subtitulo">Escull el teu atac:</h2>
+
+            <div id='contAtacs' class="targetes-atacs">
+            </div>
+
+            <div id="missatges">
+                <p id="resultat">¡¡¡Fot-li fort!!!</p>
+            
+                <section id="reiniciar">
+                    <button id="boto-reiniciar">Vols tornar a jugar?</button>
+                </section>
+            </div>
+            <div class="atacs">
+                <div class="atacs-jugador">
+                    <p id="vides-jugador">0</p>
+                    <p id="animal-jugador"></p>
+                    <div id="atacs-d-jugador"></div>
+                </div>
+                <div class="atacs-enemic"> 
+                    <p id="vides-enemic">0</p>
+                    <p id="animal-enemic"></p>
+                    <div id="atacs-d-enemic"></div>               
+                </div>
+            </div>
+        </section>
+        <script src="./js/main.js"></script>
+    </body>
+</html>
