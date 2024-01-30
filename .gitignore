@@ -1,7 +1,5 @@
 # Ignora arxius binaris
 *.jpg
-*.jpeg
-*.png
 *.gif
 *.bmp
 *.ico
