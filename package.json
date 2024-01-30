@@ -1,0 +1,19 @@
+{
+  "name": "gitprogbas",
+  "version": "1.0.0",
+  "description": "joc d'animals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afagmato/gitProgBas.git"
+  },
+  "author": "afagmato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afagmato/gitProgBas/issues"
+  },
+  "homepage": "https://github.com/afagmato/gitProgBas#readme"
+}
