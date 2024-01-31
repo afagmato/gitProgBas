@@ -21,6 +21,7 @@ const contAtacs = document.getElementById('contAtacs')
 const sectionVeureMapa = document.getElementById('veure-mapa')
 const mapa = document.getElementById('mapa')
 
+let jugadorId = null
 let animals = []
 let atacJugador = []
 let atacEnemic = []
@@ -240,11 +241,22 @@ function iniciarJoc() {
     
     botonAnimalJugador.addEventListener('click', seleccionarAnimalJugador)
     
-
-
-
-
     botoReiniciar.addEventListener('click', reiniciarJoc)
+
+    unirseAlJuego()
+}
+
+function unirseAlJuego() {
+    fetch("http://localhost:8080/unirse")
+        .then(function (res) {
+            if (res.ok) {
+                res.text()
+                    .then(function (respuesta) {
+                        console.log(respuesta)
+                        jugadorId = respuesta
+                    })
+            }
+        })
 }
 
 function seleccionarAnimalJugador() { // Selecció animal jugador
@@ -273,9 +285,23 @@ function seleccionarAnimalJugador() { // Selecció animal jugador
         alert("No has escollit cap animal, has d'escollir-ne un!")
     }
 
+    seleccionarAnimal(animalJugador)
+
     extraureAtacs(animalJugador)
     sectionVeureMapa.style.display = 'flex'
     iniciarMapa()
+}
+
+function seleccionarAnimal(animalJugador) {
+    fetch(`http://localhost:8080/gitProgBas/${jugadorId}`, { 
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify ({
+            animal: animalJugador 
+        })
+    })
 }
 
 function extraureAtacs() {
