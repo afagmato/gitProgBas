@@ -512,10 +512,9 @@ function enviarPosicion(x, y) {
     fetch(`http://localhost:8080/gitProgBas/${jugadorId}/posicion`), {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({x, 
-            y 
-        })
+        body: JSON.stringify({ x: x, y: y })
     }
+    console.log(x, y);
 }
 
 function moureDreta() {

@@ -66,8 +66,11 @@ app.post("/gitProgBas/:jugadorId/posicion", (req, res) => {
     if (jugadorIndex >= 0) {
         jugadores[jugadorIndex].actualizarPosicion(x, y)
     }
+    const enemics = jugadores.filter((jugador) => jugadorId != jugador.id)
 
-    res.end()
+    res.send({
+        enemics
+    })
 })
 
 
