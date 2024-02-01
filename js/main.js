@@ -489,6 +489,9 @@ function pintarCanvas() {
         mapa.height
         )
     animalJugadorObjecte.pintarAnimal()
+
+    enviarPosicion(animalJugadorObjecte.x, animalJugadorObjecte.y)
+    
     gatEnemic.pintarAnimal()
     alpacaEnemic.pintarAnimal()
     gosEnemic.pintarAnimal()
@@ -503,8 +506,16 @@ function pintarCanvas() {
         revisarXoc(polletEnemic)
         revisarXoc(hamsterEnemic)
     }
+}
 
-
+function enviarPosicion(x, y) {
+    fetch(`http://localhost:8080/gitProgBas/${jugadorId}/posicion`), {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({x, 
+            y 
+        })
+    }
 }
 
 function moureDreta() {
